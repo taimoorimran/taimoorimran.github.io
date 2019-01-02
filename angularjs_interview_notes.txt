@@ -1,0 +1,78 @@
+JavaScript: scripting or programming language
+jQuery    : Library
+AngularJS : Framework
+
+DOM: Document Object Model
+XHR: XMLHttpRequest
+
+$emit: dispatches an event upwards through the scope hierarchy.
+
+$broadcast: dispatches an event downwards to all child scopes.
+
+$rootScope.$emit only lets other $rootScope listeners catch it. This is good when you don't want every $scope to get it. Mostly a high level communication. Think of it as adults talking to each other in a room so the kids can't hear them.
+
+- $rootScope.$broadcast is a method that lets pretty much everything hear it. This would be the equivalent of parents yelling that dinner is ready so everyone in the house hears it.
+- $scope.$emit is when you want that $scope and all its parents and $rootScope to hear the event. This is a child whining to their parents at home (but not at a grocery store where other kids can hear).
+- $scope.$broadcast is for the $scope itself and its children. This is a child whispering to its stuffed animals so their parents can't hear.
+
+$scope: objects that are refer as model - bridge b/w views & controllers - can watch expressions & propagates events.
+
+AngularJS booting: HTML doc is loaded, evaluation by browser, AngularJS is loaded, angular global variable, controller function is executed, scanning through html for views and and apps, connects views with controllers, populate values in views from model set by controller.
+
+Model − lowest level of the pattern responsible for maintaining data.
+View − responsible for displaying data to the user.
+Controller − controls the interactions between the Model and View.
+
+$interpolation {{}} - It relies on $interpolation, a service which is called by the compiler. It evaluates text and markup which may contain AngularJS expressions. For every interpolated expression, a “watch()” is set. $interpolation returns a function, which has a single argument, “context”. By calling that function and providing a scope as context, the expressions are “$parse()”d against that scope.
+
+service is the cleanest, fastest and easiest way to share data between controllers.
+– Using events
+– Using $parent, nextSibling, controllerAs, etc. to directly access the controllers
+– Using the $rootScope to add the data on (not a good practice)
+
+ng-show/ng-hide will always insert the DOM element, but will display/hide it based on the condition. ng-if will not insert the DOM element until the condition is not fulfilled. ng-if is faster.
+
+In each digest cycle Angular compares the old and the new version of the scope model values. The digest cycle is triggered automatically. $apply() is used to trigger the digest cycle manually.
+Why $digest is needed?
+1. User Interaction through events.
+2. XMLHttpRequests.
+3. Timeouts.
+
+DOM manipulation should exist in directive, not in controllers, services or anywhere else.
+
+– One way binding implies that the scope variable in the html will be set to the first value its model is bound to (i.e. assigned to)
+– Two way binding implies that the scope variable will change it’s value everytime its model is assigned to a different value
+
+$scope.$apply re-evaluates all the declared ng-models and applies the change to any that have been altered (i.e. assigned to a new value)
+
+ngModel directive: binds an input, select, textarea (or custom form control) to a property on the $scope using NgModelController, which is created and exposed by this directive.
+
+angular.copy() is powerful, it creates deep copy of variable.
+
+What is Service?
+- Objects that provide separation of concers to an AngularJS app.
+- Can be created using factory or service method.
+- Are singleton components, means single isntance will be used wherever it is injected.
+- Can be injected to another service or into a controller.
+Examples: $http, $log
+
+What are directives?
+- Markers on a DOM element (such as class, element, attribute or comment).
+- $compile compiler attaches specified behaviour, to DOM element.
+- Bydefault directives: ngBind, ngModel, ngClass.
+- Can be custom created.
+The restrict option is typically set to:
+A – only matches attribute name
+E – only matches element name
+C – only matches class name
+M - only matches comment
+AEC – matches either attribute or element or class name
+
+Singleton pattern: stricts use of class more than once, in angular we can find it in dependency injection and in the services.
+
+Interceptor: Middleware code where all $http request go through.
+
+
+Bad Practices:
+To use $rootscope, instead use services and factories.
+To use JQuery with AnguarlJS due to DOM manipulation.
